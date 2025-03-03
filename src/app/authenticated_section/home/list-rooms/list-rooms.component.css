@@ -1,0 +1,31 @@
+.connected {
+    background-color: green;
+}
+
+.notConnected {
+    background-color: red;
+}
+
+#content {
+    margin: auto;
+    padding: 5%;
+    width: 70%;
+    font-family: Georama;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.separation {
+    background: linear-gradient(to right, transparent, black, transparent);
+    height: 5px;
+    width: 75%;
+    margin: auto;
+}
+
+.room {
+    border: 1px solid grey;
+}

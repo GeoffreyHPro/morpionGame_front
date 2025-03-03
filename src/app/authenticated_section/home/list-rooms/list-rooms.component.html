@@ -1,0 +1,37 @@
+<div id="content">
+
+
+    <h1 style="text-align: center; font-weight: bold;">List of Rooms</h1>
+    <br>
+    <div class="separation"></div>
+
+    <div class="card" style="padding: 0 25px 25px 25px;">
+        <div class="row align-items-center justify-content-center" style="height: 50px;">
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="circle" [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }"> </div>
+                <span class="ms-2">username1564</span>
+            </div>
+            <div class="col-md-6">
+                classement :
+            </div>
+        </div>
+
+        <div class="list-group" style="border: 0;">
+            <div class="list-group-item room" *ngFor="let room of listRooms"
+                style="margin-top: 5px; border-radius: 5px; border: 2px solid rgb(114, 116, 27);">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        {{room.users}}
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        <button *ngIf="room.users.length < 2; else RoomFull" (click)="joinRoom(room.roomId)">Join
+                            room</button>
+                        <ng-template #RoomFull>
+                            <button disabled>Join room</button>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
