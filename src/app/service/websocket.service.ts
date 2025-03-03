@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
   private stompClient!: Client;
-  private isConnected = false;
+  private isConnected = new BehaviorSubject<boolean>(false);
   private username: string = "";
 
   constructor() { }
+
+  isWebsocketConnected(): Observable<boolean> {
+    return this.isConnected.asObservable();
+  }
 
   connect() {
     let number = Math.round(Math.random() * (0 - 2000) + 0);
@@ -24,13 +29,7 @@ export class WebsocketService {
     });
 
     this.stompClient.onConnect = () => {
-      console.log('WebSocket connected');
-      this.isConnected = true;
-
-      this.stompClient.subscribe("/room/list", (message) => {
-        const listRoom = JSON.parse(message.body);
-        console.log(listRoom);
-      });
+      this.isConnected.next(true);
     };
 
     this.stompClient.onWebSocketError = (error) => {
@@ -38,7 +37,8 @@ export class WebsocketService {
     };
 
     this.stompClient.activate();
-    setTimeout(() => {
+
+    /*setTimeout(() => {
       if (this.isConnected) {
         this.sendMessageJoinRoomSocket();
       }
@@ -47,9 +47,8 @@ export class WebsocketService {
       if (this.isConnected) {
         this.sendMessageGetListRoom();
       }
-    }, 2000);
+    }, 2000);*/
   }
-
   sendMessageJoinRoomSocket() {
     this.stompClient.publish({
       destination: "/app/room/join",
@@ -57,10 +56,21 @@ export class WebsocketService {
     });
   }
 
+  getListRooms(): Observable<any> {
+    const subject = new Subject<any>()
+    this.stompClient.subscribe("/room/list", (message) => {
+      const listRoom = JSON.parse(message.body);
+      console.log(message);
+      subject.next(message);
+      subject.complete();
+    });
+    return subject.asObservable();
+  }
+
   sendMessageGetListRoom() {
     this.stompClient.publish({
       destination: "/app/room/list",
-      //body: JSON.stringify({ "sender": this.username, "type": "CHAT", "content": this.newMessage })
     });
   }
+
 }

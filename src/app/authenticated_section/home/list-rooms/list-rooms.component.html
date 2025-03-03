@@ -1,0 +1,7 @@
+<button (click)="getListRooms()">Get List of rooms</button>
+
+<button (click)="joinRoom()">Join Room</button>
+
+<div [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }">
+    Statut : {{ isConnected ? 'Connecté' : 'Déconnecté' }}
+</div>
