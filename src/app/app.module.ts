@@ -7,12 +7,18 @@ import { RxStompService } from '@stomp/ng2-stompjs';
 import { HomeComponent } from './authenticated_section/home/home.component';
 import { ListRoomsComponent } from './authenticated_section/home/list-rooms/list-rooms.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeUnauthenticatedComponent } from './unauthenticated_section/home-unauthenticated/home-unauthenticated.component';
+import { LoginComponent } from './unauthenticated_section/home-unauthenticated/login/login.component';
+import { SignupComponent } from './unauthenticated_section/home-unauthenticated/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListRoomsComponent,
     HomeComponent,
+    HomeUnauthenticatedComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
