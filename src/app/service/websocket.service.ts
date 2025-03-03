@@ -8,13 +8,21 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class WebsocketService {
   private stompClient!: Client;
-  private isConnected = new BehaviorSubject<boolean>(false);
   private username: string = "";
+
+  private listRooms = new BehaviorSubject<any[]>([]);
+  private isConnected = new BehaviorSubject<boolean>(false);
+
+  private listRoomSubscribe!: any;
 
   constructor() { }
 
   isWebsocketConnected(): Observable<boolean> {
     return this.isConnected.asObservable();
+  }
+
+  getListRooms(): Observable<any[]> {
+    return this.listRooms.asObservable();
   }
 
   connect() {
@@ -37,34 +45,13 @@ export class WebsocketService {
     };
 
     this.stompClient.activate();
-
-    /*setTimeout(() => {
-      if (this.isConnected) {
-        this.sendMessageJoinRoomSocket();
-      }
-    }, 2000);
-    setTimeout(() => {
-      if (this.isConnected) {
-        this.sendMessageGetListRoom();
-      }
-    }, 2000);*/
   }
+
   sendMessageJoinRoomSocket() {
     this.stompClient.publish({
       destination: "/app/room/join",
       body: JSON.stringify({ "username": this.username, "roomId": 1 })
     });
-  }
-
-  getListRooms(): Observable<any> {
-    const subject = new Subject<any>()
-    this.stompClient.subscribe("/room/list", (message) => {
-      const listRoom = JSON.parse(message.body);
-      console.log(message);
-      subject.next(message);
-      subject.complete();
-    });
-    return subject.asObservable();
   }
 
   sendMessageGetListRoom() {
@@ -73,4 +60,18 @@ export class WebsocketService {
     });
   }
 
+  unSubscribleListRoom() {
+    this.listRoomSubscribe.unsubscribe();
+  }
+
+  subscribeListRoom() {
+    this.listRoomSubscribe = this.stompClient.subscribe("/room/list", (message) => {
+      const listRoom = JSON.parse(message.body);
+      const arrayListRoom = Object.entries(listRoom).map(([key, value]) => ({
+        roomId: key,
+        users: value,
+      }));
+      this.listRooms.next(arrayListRoom);
+    });
+  }
 }

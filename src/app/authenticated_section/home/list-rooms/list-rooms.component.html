@@ -1,7 +1,11 @@
-<button (click)="getListRooms()">Get List of rooms</button>
+<!--<button (click)="getListRooms()">Get List of rooms</button>-->
 
 <button (click)="joinRoom()">Join Room</button>
 
 <div [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }">
-    Statut : {{ isConnected ? 'Connecté' : 'Déconnecté' }}
+    Statut : {{ isConnected ? 'online' : 'offline' }}
+</div>
+
+<div *ngFor="let room of listRooms">
+    {{room.roomId}} : {{room.users}}
 </div>
