@@ -33,7 +33,7 @@ export class ListRoomsComponent {
     )
   }
 
-  joinRoom() {
-    this.clientWebSocket.sendMessageJoinRoomSocket();
+  joinRoom(roomId: string) {
+    this.clientWebSocket.sendMessageJoinRoomSocket(roomId);
   }
 }
