@@ -5,3 +5,12 @@
 .notConnected {
     background-color: red;
 }
+
+#content {
+    margin: auto;
+    width: 70%;
+}
+
+.room {
+    border: 1px solid grey;
+}

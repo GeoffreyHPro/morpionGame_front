@@ -1,11 +1,25 @@
 <!--<button (click)="getListRooms()">Get List of rooms</button>-->
 
-<button (click)="joinRoom()">Join Room</button>
+<div id="content">
+    <button (click)="joinRoom()">Join Room</button>
 
-<div [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }">
-    Statut : {{ isConnected ? 'online' : 'offline' }}
-</div>
+    <div [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }">
+        Statut : {{ isConnected ? 'online' : 'offline' }}
+    </div>
 
-<div *ngFor="let room of listRooms">
-    {{room.roomId}} : {{room.users}}
+    <div class="list-group">
+        <div class="list-group-item room" *ngFor="let room of listRooms" style="margin-top: 5px;">
+            <div class="row">
+            <div class="col-md-6 ">
+                {{room.users}}
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <button *ngIf="room.users.length == 2 else noPlaceInRoom" disabled="true">Join room</button>
+                <ng-template #noPlaceInRoom>
+                    <button>Join room</button>
+                </ng-template>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
