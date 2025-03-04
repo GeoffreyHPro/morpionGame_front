@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'app-list-rooms',
   templateUrl: './list-rooms.component.html',
   styleUrls: ['./list-rooms.component.css']
 })
 export class ListRoomsComponent {
   listRooms!: any;
+  @Input() username!: string;
 
   constructor(private clientWebSocket: WebsocketService) { }
 
@@ -27,6 +28,6 @@ export class ListRoomsComponent {
   }
 
   joinRoom(roomId: string) {
-    this.clientWebSocket.sendMessageJoinRoomSocket(roomId);
+    this.clientWebSocket.sendMessageJoinRoomSocket(roomId, this.username);
   }
 }

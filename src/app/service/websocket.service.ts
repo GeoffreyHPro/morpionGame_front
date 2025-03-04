@@ -47,10 +47,10 @@ export class WebsocketService {
     this.stompClient.activate();
   }
 
-  sendMessageJoinRoomSocket(idRoom: string) {
+  sendMessageJoinRoomSocket(idRoom: string, username: string) {
     this.stompClient.publish({
       destination: "/app/room/join",
-      body: JSON.stringify({ "username": this.username, "roomId": idRoom })
+      body: JSON.stringify({ "username": username, "roomId": idRoom })
     });
   }
 

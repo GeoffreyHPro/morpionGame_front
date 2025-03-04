@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserInformationService } from '../../../../service/user-information.service';
 import { WebsocketService } from '../../../../service/websocket.service';
 
@@ -9,7 +9,7 @@ import { WebsocketService } from '../../../../service/websocket.service';
 })
 export class UserInformationsComponent {
   isConnected = false;
-  username = "";
+  @Input() username!: string;
 
   constructor(
     private userInformationService: UserInformationService,
