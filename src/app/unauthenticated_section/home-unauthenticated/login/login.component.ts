@@ -33,6 +33,7 @@ export class LoginComponent {
         console.log(response.body?.token)
 
         localStorage.setItem("token", response.body!.token);
+        console.log(response.body!.token)
         localStorage.setItem("role", response.body!.role);
         this.router.navigateByUrl("home")
       }

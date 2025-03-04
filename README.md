@@ -1,27 +1,25 @@
-# TestAngularWebSocket
+# Front of Morpion Project 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+The part of front project made in Angular. This project is a multiplayer game of Morpion.
 
-## Development server
+# 👩‍💻 Technologies
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+| Front - Angular | version (works) | 
+| --- | --- |
+| npm | 10.5.0 |
 
-## Code scaffolding
+# 🛠 Project and funtionnalities
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+✅ Connection of user succeed with securized token in rest controller
 
-## Build
+✅ Connection of user succeed with websocket stomp controller
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# ⚡️ Standard Execution
 
-## Running unit tests
+```bash
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+npm start
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+URL of website: http://localhost:4200/
