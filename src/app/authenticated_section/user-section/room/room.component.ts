@@ -8,10 +8,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RoomComponent {
   roomId!: string | null;
+  username!: string;
 
   constructor(private activatedRoute: ActivatedRoute){}
 
   ngOnInit(){
     this.roomId = this.activatedRoute.snapshot.paramMap.get("roomId");
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.username = params["username"];
+    });
   }
 }

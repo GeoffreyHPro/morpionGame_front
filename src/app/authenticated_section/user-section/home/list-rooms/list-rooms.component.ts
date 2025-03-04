@@ -34,6 +34,6 @@ export class ListRoomsComponent {
 
   joinRoom(roomId: string) {
     this.clientWebSocket.sendMessageJoinRoomSocket(roomId, this.username);
-    this.router.navigate(["/room", roomId])
+    this.router.navigate(["/room", roomId], { queryParams: { "username": this.username } })
   }
 }

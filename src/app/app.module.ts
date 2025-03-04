@@ -13,6 +13,8 @@ import { ListRoomsComponent } from './authenticated_section/user-section/home/li
 import { HomeComponent } from './authenticated_section/user-section/home/home.component';
 import { UserInformationsComponent } from './authenticated_section/user-section/home/user-informations/user-informations.component';
 import { RoomComponent } from './authenticated_section/user-section/room/room.component';
+import { RoomInformationsComponent } from './authenticated_section/user-section/room/room-informations/room-informations.component';
+import { GameRoomComponent } from './authenticated_section/user-section/room/game-room/game-room.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { RoomComponent } from './authenticated_section/user-section/room/room.co
     UserSectionComponent,
     UserInformationsComponent,
     RoomComponent,
+    RoomInformationsComponent,
+    GameRoomComponent,
   ],
   imports: [
     BrowserModule,
