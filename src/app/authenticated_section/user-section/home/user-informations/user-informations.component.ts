@@ -8,7 +8,7 @@ import { WebsocketService } from '../../../../service/websocket.service';
 })
 export class UserInformationsComponent {
   isConnected = false;
-  @Input() username!: string;
+  @Input() username: string = "";
 
   constructor(
     private clientWebSocket: WebsocketService) { }

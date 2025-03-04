@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { WebsocketService } from '../../../../service/websocket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-rooms',
@@ -10,13 +11,17 @@ export class ListRoomsComponent {
   listRooms!: any;
   @Input() username!: string;
 
-  constructor(private clientWebSocket: WebsocketService) { }
+  constructor(
+    private clientWebSocket: WebsocketService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.clientWebSocket.connect();
     setTimeout(() => {
       this.clientWebSocket.subscribeListRoom();
       this.clientWebSocket.sendMessageGetListRoom();
+      this.clientWebSocket.sendMessageAddUser(this.username);
     }, 1000);
 
     this.clientWebSocket.getListRooms().subscribe(
@@ -29,5 +34,6 @@ export class ListRoomsComponent {
 
   joinRoom(roomId: string) {
     this.clientWebSocket.sendMessageJoinRoomSocket(roomId, this.username);
+    this.router.navigate(["/room", roomId])
   }
 }

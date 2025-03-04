@@ -12,6 +12,7 @@ import { UserSectionComponent } from './authenticated_section/user-section/user-
 import { ListRoomsComponent } from './authenticated_section/user-section/home/list-rooms/list-rooms.component';
 import { HomeComponent } from './authenticated_section/user-section/home/home.component';
 import { UserInformationsComponent } from './authenticated_section/user-section/home/user-informations/user-informations.component';
+import { RoomComponent } from './authenticated_section/user-section/room/room.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserInformationsComponent } from './authenticated_section/user-section/
     SignupComponent,
     UserSectionComponent,
     UserInformationsComponent,
+    RoomComponent,
   ],
   imports: [
     BrowserModule,

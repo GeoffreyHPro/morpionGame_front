@@ -5,12 +5,14 @@ import { UserSectionComponent } from './authenticated_section/user-section/user-
 import { authenticationGuard } from './guard/authentication.guard';
 import { authorizationGuard } from './guard/authorization.guard';
 import { HomeComponent } from './authenticated_section/user-section/home/home.component';
+import { RoomComponent } from './authenticated_section/user-section/room/room.component';
 
 const routes: Routes = [
   { path: "", component: HomeUnauthenticatedComponent },
   {
     path: "", component: UserSectionComponent, canActivate: [authenticationGuard, authorizationGuard], children: [
       { path: "home", component: HomeComponent },
+      { path: "room/:roomId", component: RoomComponent },
     ]
   },
   { path: "**", redirectTo: "", pathMatch: "full" }
