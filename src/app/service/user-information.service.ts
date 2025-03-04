@@ -11,7 +11,7 @@ export class UserInformationService {
   constructor(private clientHttp: HttpClient) { }
 
   getUsername(): Observable<HttpResponse<UserInformationResponse>> {
-    const token = localStorage.getItem("Token");
+    const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     })

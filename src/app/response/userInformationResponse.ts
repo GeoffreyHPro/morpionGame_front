@@ -1,4 +1,4 @@
 export interface UserInformationResponse {
-    username: string,
+    name: string,
     email: string
 };

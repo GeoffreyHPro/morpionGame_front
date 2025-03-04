@@ -11,6 +11,7 @@ import { SignupComponent } from './unauthenticated_section/home-unauthenticated/
 import { UserSectionComponent } from './authenticated_section/user-section/user-section.component';
 import { ListRoomsComponent } from './authenticated_section/user-section/home/list-rooms/list-rooms.component';
 import { HomeComponent } from './authenticated_section/user-section/home/home.component';
+import { UserInformationsComponent } from './authenticated_section/user-section/home/user-informations/user-informations.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HomeComponent } from './authenticated_section/user-section/home/home.co
     LoginComponent,
     SignupComponent,
     UserSectionComponent,
+    UserInformationsComponent,
   ],
   imports: [
     BrowserModule,

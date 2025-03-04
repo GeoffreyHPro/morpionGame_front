@@ -7,7 +7,6 @@ import { WebsocketService } from '../../../../service/websocket.service';
   styleUrls: ['./list-rooms.component.css']
 })
 export class ListRoomsComponent {
-  isConnected = false;
   listRooms!: any;
 
   constructor(private clientWebSocket: WebsocketService) { }
@@ -25,12 +24,6 @@ export class ListRoomsComponent {
         console.log("updated rooms : " + updatedListRooms)
       }
     );
-    this.clientWebSocket.isWebsocketConnected().subscribe(
-      status => {
-        this.isConnected = status;
-        console.log(status)
-      }
-    )
   }
 
   joinRoom(roomId: string) {

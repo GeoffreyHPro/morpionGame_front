@@ -4,15 +4,7 @@
     <div class="separation"></div>
 
     <div class="card" style="padding: 0 25px 25px 25px;">
-        <div class="row align-items-center justify-content-center" style="height: 50px;">
-            <div class="col-md-6 d-flex align-items-center">
-                <div class="circle" [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }"> </div>
-                <span class="ms-2">username1564</span>
-            </div>
-            <div class="col-md-6">
-                classement :
-            </div>
-        </div>
+        <app-user-informations></app-user-informations>
 
         <div class="list-group" style="border: 0;">
             <div class="list-group-item room" *ngFor="let room of listRooms"
