@@ -1,11 +1,14 @@
 <div style="border: 1px solid black; margin: 25px; padding: 25px; border-radius: 15px;">
-    <form>
+    <form [formGroup]="formLogin">
         <label class="form-label" for="email">Email</label>
-        <input class="form-control" id="email" name="email" placeholder="Type your email" type="email">
+        <input class="form-control" formControlName="email" id="email" name="email" placeholder="Type your email"
+            type="email">
         <br>
         <label class="form-label" for="password">Password</label>
-        <input class="form-control" id="password" name="password" placeholder="Type your password" type="text">
+        <input class="form-control" formControlName="password" id="password" name="password"
+            placeholder="Type your password" type="text">
         <br>
-        <button class="btn mt-3" style="background-color: green; color: white; width: 100%;">Login</button>
+        <button (click)="handleButtonLogin()" class="btn mt-3"
+            style="background-color: green; color: white; width: 100%;">Login</button>
     </form>
 </div>

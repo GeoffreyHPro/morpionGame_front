@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeUnauthenticatedComponent } from './unauthenticated_section/home-unauthenticated/home-unauthenticated.component';
 import { LoginComponent } from './unauthenticated_section/home-unauthenticated/login/login.component';
 import { SignupComponent } from './unauthenticated_section/home-unauthenticated/signup/signup.component';
+import { UserSectionComponent } from './authenticated_section/user-section/user-section.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SignupComponent } from './unauthenticated_section/home-unauthenticated/
     HomeUnauthenticatedComponent,
     LoginComponent,
     SignupComponent,
+    UserSectionComponent,
   ],
   imports: [
     BrowserModule,
