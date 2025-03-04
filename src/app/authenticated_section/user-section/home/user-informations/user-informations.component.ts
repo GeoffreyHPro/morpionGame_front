@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { UserInformationService } from '../../../../service/user-information.service';
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class UserInformationsComponent {
   @Input() username!: string;
 
   constructor(
-    private userInformationService: UserInformationService,
     private clientWebSocket: WebsocketService) { }
 
   ngOnInit() {
@@ -20,12 +18,6 @@ export class UserInformationsComponent {
       status => {
         this.isConnected = status;
         console.log(status)
-      }
-    )
-
-    this.userInformationService.getUsername().subscribe(
-      response => {
-        this.username = response.body!.name;
       }
     )
   }
