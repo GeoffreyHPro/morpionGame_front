@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from '../../../service/websocket.service';
+import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
   selector: 'app-chat',
