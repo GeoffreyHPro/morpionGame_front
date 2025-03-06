@@ -21,11 +21,6 @@ export class ChatComponent {
   inputIsDisabled = "true";
 
   constructor(private webSocket: WebsocketService) {
-    /*this.webSocket.getMessageRoom().subscribe(
-      response => {
-        console.log("");
-      }
-    )*/
   }
 
   ngOnInit() {
@@ -39,7 +34,7 @@ export class ChatComponent {
   }
 
   sendMessage() {
-    this.webSocket.sendMessageInRoom(this.roomId!)
+    this.webSocket.sendMessageInRoom(this.roomId!, this.newMessage, this.username);
   }
 }
 

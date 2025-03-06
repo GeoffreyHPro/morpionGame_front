@@ -99,10 +99,10 @@ export class WebsocketService {
 
   /************** Messages ********************/
   /***** Send *****/
-  sendMessageInRoom(roomId: string) {
+  sendMessageInRoom(roomId: string, content: string, sender: string) {
     this.stompClient.publish({
       destination: `/app/room/${roomId}/message`,
-      body: JSON.stringify({ "username": "username", "message" : "bonjour"})
+      body: JSON.stringify({ "username": sender, "message" : content})
     });
   }
 
