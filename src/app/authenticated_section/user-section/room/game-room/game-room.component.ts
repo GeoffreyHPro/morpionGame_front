@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class GameRoomComponent {
 
+  handleButtonStartGame(event: Event) {
+    const htmlElement = event.target! as HTMLButtonElement;
+    htmlElement.style.display = "none";
+  }
 }
