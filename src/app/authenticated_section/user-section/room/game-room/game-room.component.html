@@ -2,10 +2,10 @@
     <div>
         <div id="game" class="row" style="display: none; color: white;">
             <div class="col-md-8">
-                <app-game></app-game>
+                <app-game [username]="username" [roomId]="roomId"></app-game>
             </div>
             <div class="col-md-4">
-                <app-chat></app-chat>
+                <app-chat [username]="username" [roomId]="roomId"></app-chat>
             </div>
         </div>
     </div>
