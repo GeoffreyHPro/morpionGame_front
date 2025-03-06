@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { WebsocketService } from '../../../../../service/websocket.service';
 
-interface InterfaceMessage {
-  content: string,
+export interface InterfaceMessage {
   sender: string,
-  type: string,
+  content: string,
 }
 
 @Component({
@@ -21,7 +20,7 @@ export class ChatComponent {
   newMessage: string = '';
   inputIsDisabled = "true";
 
-  constructor(private webSocket: WebsocketService){
+  constructor(private webSocket: WebsocketService) {
     /*this.webSocket.getMessageRoom().subscribe(
       response => {
         console.log("");
@@ -29,7 +28,26 @@ export class ChatComponent {
     )*/
   }
 
-  sendMessage(){
-    console.log(this.newMessage)
+  ngOnInit() {
+    this.webSocket.subscribeMessageRoom(this.roomId!);
+
+    this.webSocket.getMessageRoom().subscribe(
+      message => {
+        this.messages.push(convertToInterfaceMessage(message));
+      }
+    );
   }
+
+  sendMessage() {
+    this.webSocket.sendMessageInRoom(this.roomId!)
+  }
+}
+
+export function convertToInterfaceMessage(message: any) {
+  const parsedBody: any = JSON.parse(message);
+  const receivedMessage: InterfaceMessage = {
+    sender: parsedBody.username || "Empty Message",
+    content: parsedBody.message || ""
+  };
+  return receivedMessage;
 }

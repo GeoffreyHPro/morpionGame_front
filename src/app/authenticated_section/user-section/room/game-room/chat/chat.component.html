@@ -3,7 +3,7 @@
         <div class="chat-container">
             <div class="messages">
                 <div *ngFor="let msg of messages">
-                    <div *ngIf="msg.type === 'CHAT'; else notChat">
+                    <div>
                         <div *ngIf="msg.sender === username; else notMyMessage" class="my-message">
                             {{ msg.content }}
                         </div>
