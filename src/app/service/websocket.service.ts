@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
   private stompClient!: Client;
-  private username: string = "";
 
   private listRooms = new BehaviorSubject<any[]>([]);
   private isConnected = new BehaviorSubject<boolean>(false);
+  private listMessageRoom = new BehaviorSubject<any>([]);
 
   private listRoomSubscribe!: any;
+  private listMessageSubscribe!: any;
 
   constructor() { }
 
@@ -25,9 +26,12 @@ export class WebsocketService {
     return this.listRooms.asObservable();
   }
 
+  getMessageRoom(): Observable<any[]> {
+    return this.listMessageRoom.asObservable();
+  }
+
+  /************** Connection ********************/
   connect() {
-    let number = Math.round(Math.random() * (0 - 2000) + 0);
-    this.username = "username" + number;
     const socket = new SockJS('http://localhost:8080/wsAngular');
 
     this.stompClient = new Client({
@@ -47,22 +51,7 @@ export class WebsocketService {
     this.stompClient.activate();
   }
 
-  sendMessageJoinRoomSocket(idRoom: string, username: string) {
-    this.stompClient.publish({
-      destination: "/app/room/join",
-      body: JSON.stringify({ "username": username, "roomId": idRoom })
-    });
-  }
-
-  sendMessageLeaveRoom(idRoom: string, username: string) {
-    this.stompClient.publish({
-      destination: "/app/room/leave",
-      body: JSON.stringify({ "username": username, "roomId": idRoom })
-    });
-  }
-
   /************** User ********************/
-
   sendMessageAddUser(username: string) {
     this.stompClient.publish({
       destination: "/app/user",
@@ -71,15 +60,25 @@ export class WebsocketService {
   }
 
   /************** Room ********************/
-
+  /***** Join *****/
+  sendMessageJoinRoomSocket(idRoom: string, username: string) {
+    this.stompClient.publish({
+      destination: "/app/room/join",
+      body: JSON.stringify({ "username": username, "roomId": idRoom })
+    });
+  }
+  /***** Leave *****/
+  sendMessageLeaveRoom(idRoom: string, username: string) {
+    this.stompClient.publish({
+      destination: "/app/room/leave",
+      body: JSON.stringify({ "username": username, "roomId": idRoom })
+    });
+  }
+  /***** ListRoom *****/
   sendMessageGetListRoom() {
     this.stompClient.publish({
       destination: "/app/room/list",
     });
-  }
-
-  unSubscribleListRoom() {
-    this.listRoomSubscribe.unsubscribe();
   }
 
   subscribeListRoom() {
@@ -90,6 +89,25 @@ export class WebsocketService {
         users: value,
       }));
       this.listRooms.next(arrayListRoom);
+    });
+  }
+
+  unSubscribleListRoom() {
+    this.listRoomSubscribe.unsubscribe();
+  }
+
+  /************** Messages ********************/
+  /***** Send *****/
+  sendMessageInRoom(roomId: string) {
+    this.stompClient.publish({
+      destination: `/app/room/${roomId}/message`,
+    });
+  }
+
+  /***** Subscribe *****/
+  subscribeMessageRoom(roomId: string) {
+    this.listMessageSubscribe = this.stompClient.subscribe(`/room/${roomId}/message`, (message) => {
+      console.log(message.body);
     });
   }
 }
