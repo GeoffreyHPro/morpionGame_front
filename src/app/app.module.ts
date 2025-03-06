@@ -15,6 +15,8 @@ import { UserInformationsComponent } from './authenticated_section/user-section/
 import { RoomComponent } from './authenticated_section/user-section/room/room.component';
 import { RoomInformationsComponent } from './authenticated_section/user-section/room/room-informations/room-informations.component';
 import { GameRoomComponent } from './authenticated_section/user-section/room/game-room/game-room.component';
+import { ChatComponent } from './authenticated_section/user-section/room/game-room/chat/chat.component';
+import { GameComponent } from './authenticated_section/user-section/room/game-room/game/game.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { GameRoomComponent } from './authenticated_section/user-section/room/gam
     RoomComponent,
     RoomInformationsComponent,
     GameRoomComponent,
+    ChatComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,

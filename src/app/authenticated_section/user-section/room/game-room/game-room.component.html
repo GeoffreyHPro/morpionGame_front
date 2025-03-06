@@ -1,4 +1,14 @@
 <div id="game-content" style="align-content: center;">
+    <div>
+        <div id="game" class="row" style="display: none; color: white;">
+            <div class="col-md-8">
+                <app-game></app-game>
+            </div>
+            <div class="col-md-4">
+                <app-chat></app-chat>
+            </div>
+        </div>
+    </div>
     <button (click)="handleButtonStartGame($event)" class="btn" style="border: 2px solid white; color: white;">Start
         Party</button>
 </div>
