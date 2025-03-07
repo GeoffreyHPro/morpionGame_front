@@ -7,6 +7,14 @@
         <app-user-informations [username]="username"></app-user-informations>
 
         <div class="list-group" style="border: 0;">
+            <div class="list-group-item room d-flex"
+                style="margin-top: 5px; border-radius: 5px; border: 1px solid white; background-color: rgb(43, 9, 75); color: white; justify-content: center;">
+                <button mat-raised-button style="background-color: transparent; border: 0; color: white;"
+                    (click)="createRoom()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
             <div class="list-group-item room" *ngFor="let room of listRooms"
                 style="margin-top: 5px; border-radius: 5px; border: 1px solid white; background-color: rgb(43, 9, 75); color: white;">
                 <div class="row">
@@ -14,7 +22,8 @@
                         {{room.users}}
                     </div>
                     <div class="col-md-6 d-flex align-items-center justify-content-center">
-                        <button class="btn" *ngIf="room.users.length < 2; else RoomFull" (click)="joinRoom(room.roomId)" style="color: white; border: white 2px solid;">Join
+                        <button class="btn" *ngIf="room.users.length < 2; else RoomFull" (click)="joinRoom(room.roomId)"
+                            style="color: white; border: white 2px solid;">Join
                             room</button>
                         <ng-template #RoomFull>
                             <button class="btn" disabled style="color: white;">Join room</button>

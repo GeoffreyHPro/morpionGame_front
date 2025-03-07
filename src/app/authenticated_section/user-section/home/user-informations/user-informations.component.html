@@ -1,17 +1,9 @@
 <div class="row align-items-center justify-content-center" style="height: 50px;">
-    <div class="col-md-4 d-flex align-items-center" style="justify-content: center;">
+    <div class="col-md-6 d-flex align-items-center" style="justify-content: center;">
         <div class="circle" [ngClass]="{ 'connected': isConnected, 'notConnected': !isConnected }"> </div>
         <span class="ms-2">{{ username }}</span>
     </div>
-    <div class="col-md-4 d-flex" style="justify-content: center;">
+    <div class="col-md-6 d-flex" style="justify-content: center;">
         classement :
-    </div>
-    <div class="col-md-4 d-flex align-items-center" style="justify-content: center;">
-        <div>
-            <button mat-raised-button style="background-color: transparent; border: 0; color: white;"
-                (click)="createRoom()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
     </div>
 </div>
