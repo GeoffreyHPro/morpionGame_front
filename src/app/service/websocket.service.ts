@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { InterfaceMessage } from '../authenticated_section/user-section/room/game-room/chat/chat.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +61,14 @@ export class WebsocketService {
 
   /************** Room ********************/
   /***** Join *****/
+  sendMessageCreateRoomSocket(idRoom: string, username: string) {
+    this.stompClient.publish({
+      destination: "/app/room/create",
+      body: JSON.stringify({ "username": username, "roomId": idRoom })
+    });
+  }
+
+  /***** Join *****/
   sendMessageJoinRoomSocket(idRoom: string, username: string) {
     this.stompClient.publish({
       destination: "/app/room/join",
@@ -102,7 +109,7 @@ export class WebsocketService {
   sendMessageInRoom(roomId: string, content: string, sender: string) {
     this.stompClient.publish({
       destination: `/app/room/${roomId}/message`,
-      body: JSON.stringify({ "username": sender, "message" : content})
+      body: JSON.stringify({ "username": sender, "message": content })
     });
   }
 

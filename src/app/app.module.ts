@@ -17,6 +17,8 @@ import { RoomInformationsComponent } from './authenticated_section/user-section/
 import { GameRoomComponent } from './authenticated_section/user-section/room/game-room/game-room.component';
 import { ChatComponent } from './authenticated_section/user-section/room/game-room/chat/chat.component';
 import { GameComponent } from './authenticated_section/user-section/room/game-room/game/game.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -39,10 +41,12 @@ import { GameComponent } from './authenticated_section/user-section/room/game-ro
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [
     RxStompService,
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })

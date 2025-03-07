@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { WebsocketService } from '../../../../service/websocket.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-user-informations',
@@ -10,8 +11,7 @@ export class UserInformationsComponent {
   isConnected = false;
   @Input() username: string = "";
 
-  constructor(
-    private clientWebSocket: WebsocketService) { }
+  constructor(private clientWebSocket: WebsocketService) { }
 
   ngOnInit() {
     this.clientWebSocket.isWebsocketConnected().subscribe(
@@ -20,5 +20,10 @@ export class UserInformationsComponent {
         console.log(status)
       }
     )
+  }
+
+  createRoom() {
+    const roomId = uuidv4();
+    this.clientWebSocket.sendMessageCreateRoomSocket(roomId, this.username);
   }
 }
