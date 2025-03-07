@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { WebsocketService } from '../../../../service/websocket.service';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-list-rooms',
@@ -34,6 +35,12 @@ export class ListRoomsComponent {
 
   joinRoom(roomId: string) {
     this.clientWebSocket.sendMessageJoinRoomSocket(roomId, this.username);
+    this.router.navigate(["/room", roomId], { queryParams: { "username": this.username } })
+  }
+
+  createRoom() {
+    const roomId = uuidv4();
+    this.clientWebSocket.sendMessageCreateRoomSocket(roomId, this.username);
     this.router.navigate(["/room", roomId], { queryParams: { "username": this.username } })
   }
 }

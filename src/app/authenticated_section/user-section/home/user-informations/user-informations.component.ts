@@ -10,8 +10,7 @@ export class UserInformationsComponent {
   isConnected = false;
   @Input() username: string = "";
 
-  constructor(
-    private clientWebSocket: WebsocketService) { }
+  constructor(private clientWebSocket: WebsocketService) { }
 
   ngOnInit() {
     this.clientWebSocket.isWebsocketConnected().subscribe(

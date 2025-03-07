@@ -15,3 +15,8 @@
 .room {
     border: 1px solid grey;
 }
+
+#rooms {
+    background-color: rgb(43, 9, 75);
+    color: white;
+}
