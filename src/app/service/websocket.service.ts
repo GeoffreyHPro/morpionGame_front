@@ -120,4 +120,8 @@ export class WebsocketService {
       this.listMessageRoom.next(message.body);
     });
   }
+
+  unSubscribleMessageRoom() {
+    this.listMessageSubscribe.unsubscribe();
+  }
 }

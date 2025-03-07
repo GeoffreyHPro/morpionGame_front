@@ -17,9 +17,8 @@ export class RoomInformationsComponent {
   ) { }
 
   handleLeaveButton() {
-    console.log(this.roomId)
-    console.log(this.username)
     this.webSocket.sendMessageLeaveRoom(this.roomId!, this.username);
+    this.webSocket.unSubscribleMessageRoom();
     this.router.navigateByUrl("home");
   }
 }
