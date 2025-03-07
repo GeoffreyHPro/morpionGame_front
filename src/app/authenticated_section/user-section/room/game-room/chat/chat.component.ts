@@ -24,6 +24,7 @@ export class ChatComponent {
   }
 
   ngOnInit() {
+    this.messages = [];
     this.webSocket.subscribeMessageRoom(this.roomId!);
 
     this.webSocket.getMessageRoom().subscribe(
@@ -31,6 +32,10 @@ export class ChatComponent {
         this.messages.push(convertToInterfaceMessage(message));
       }
     );
+  }
+
+  ngOnDestroy(){
+    this.messages = [];
   }
 
   sendMessage() {
