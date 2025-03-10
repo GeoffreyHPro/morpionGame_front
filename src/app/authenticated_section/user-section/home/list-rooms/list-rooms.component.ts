@@ -28,7 +28,6 @@ export class ListRoomsComponent {
     this.clientWebSocket.getListRooms().subscribe(
       updatedListRooms => {
         this.listRooms = updatedListRooms;
-        console.log("updated rooms : " + updatedListRooms)
       }
     );
   }

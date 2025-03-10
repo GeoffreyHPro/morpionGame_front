@@ -16,7 +16,6 @@ export class UserInformationsComponent {
     this.clientWebSocket.isWebsocketConnected().subscribe(
       status => {
         this.isConnected = status;
-        console.log(status)
       }
     )
   }

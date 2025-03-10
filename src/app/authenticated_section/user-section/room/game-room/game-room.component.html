@@ -9,6 +9,7 @@
             </div>
         </div>
     </div>
-    <button (click)="handleButtonStartGame($event)" class="btn" style="border: 2px solid white; color: white;">Start
+    <button *ngIf="isGameInit" (click)="handleButtonStartGame($event)" class="btn"
+        style="border: 2px solid white; color: white;">Start
         Party</button>
 </div>

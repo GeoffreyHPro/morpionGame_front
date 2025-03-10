@@ -12,9 +12,11 @@ export class WebsocketService {
   private listRooms = new BehaviorSubject<any[]>([]);
   private isConnected = new BehaviorSubject<boolean>(false);
   private listMessageRoom = new BehaviorSubject<string>("");
+  private gameMessage = new BehaviorSubject<string>("");
 
   private listRoomSubscribe!: any;
   private listMessageSubscribe!: any;
+  private gameSubscribe!: any;
 
   constructor() { }
 
@@ -28,6 +30,10 @@ export class WebsocketService {
 
   getMessageRoom(): Observable<string> {
     return this.listMessageRoom.asObservable();
+  }
+
+  getGameMessage(): Observable<string> {
+    return this.gameMessage.asObservable();
   }
 
   /************** Connection ********************/
@@ -116,7 +122,6 @@ export class WebsocketService {
   /***** Subscribe *****/
   subscribeMessageRoom(roomId: string) {
     this.listMessageSubscribe = this.stompClient.subscribe(`/room/${roomId}/message`, (message) => {
-      console.log(message.body);
       this.listMessageRoom.next(message.body);
     });
   }
@@ -124,5 +129,26 @@ export class WebsocketService {
   unSubscribleMessageRoom() {
     this.listMessageRoom.next("");
     this.listMessageSubscribe.unsubscribe();
+  }
+
+  /************** Game ********************/
+  /***** ready *****/
+  sendGameReady(roomId: string, content: string, sender: string) {
+    this.stompClient.publish({
+      destination: `/app/room/${roomId}/game/ready`,
+      body: JSON.stringify({ "username": sender, "message": content })
+    });
+  }
+
+  /***** Subscribe *****/
+  subscribeGame(roomId: string) {
+    this.gameSubscribe = this.stompClient.subscribe(`/room/${roomId}/game`, (message) => {
+      this.gameMessage.next(message.body);
+    });
+  }
+
+  unSubscribleGame() {
+    this.gameMessage.next("");
+    this.gameSubscribe.unsubscribe();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { WebsocketService } from '../../../../../service/websocket.service';
 
 @Component({
   selector: 'app-game',
@@ -8,4 +9,12 @@ import { Component, Input } from '@angular/core';
 export class GameComponent {
   @Input() username!: string;
   @Input() roomId!: string | null;
+
+  constructor(private clientWebSocketService: WebsocketService) { }
+
+  cellClick(event: Event) {
+    const cell = event.target as HTMLElement;
+    cell.setAttribute("disabled", "true");
+    cell.style.backgroundColor = "red";
+  }
 }
