@@ -10,14 +10,46 @@ export class GameRoomComponent {
   @Input() username!: string;
   @Input() roomId!: string | null;
 
-  constructor( private clientWebSocket: WebsocketService){}
+  isGameInit: boolean = false;
+
+  constructor(private clientWebSocket: WebsocketService) { }
+
+  ngOnInit() {
+    this.clientWebSocket.getGameMessage().subscribe(
+      response => {
+        if (response != "") {
+          const gameMessage = convertToInterfaceGameMessage(response);
+          if (gameMessage.type === "init_game") {
+            this.disabledButtonToAvailable();
+          }
+        }
+      }
+    )
+  }
+
+  disabledButtonToAvailable() {
+    this.isGameInit = true;
+  }
 
   handleButtonStartGame(event: Event) {
-    console.log(this.roomId! + this.username);
-    this.clientWebSocket.sendGameReady(this.roomId!, "READY" , this.username);
+    this.clientWebSocket.sendGameReady(this.roomId!, "READY", this.username);
     const htmlElement = event.target! as HTMLButtonElement;
     htmlElement.style.display = "none";
     const div = document.getElementById('game');
     div!.style.display = "flex";
   }
+}
+
+export interface InterfaceGameMessage {
+  type: string,
+  username: string
+}
+
+export function convertToInterfaceGameMessage(message: any) {
+  const parsedBody: any = JSON.parse(message);
+  const receivedMessage: InterfaceGameMessage = {
+    type: parsedBody.type || "",
+    username: parsedBody.username || ""
+  };
+  return receivedMessage;
 }

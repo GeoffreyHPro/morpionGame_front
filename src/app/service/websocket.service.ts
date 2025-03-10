@@ -122,7 +122,6 @@ export class WebsocketService {
   /***** Subscribe *****/
   subscribeMessageRoom(roomId: string) {
     this.listMessageSubscribe = this.stompClient.subscribe(`/room/${roomId}/message`, (message) => {
-      console.log(message.body);
       this.listMessageRoom.next(message.body);
     });
   }
@@ -144,7 +143,6 @@ export class WebsocketService {
   /***** Subscribe *****/
   subscribeGame(roomId: string) {
     this.gameSubscribe = this.stompClient.subscribe(`/room/${roomId}/game`, (message) => {
-      console.log("---------------" + message.body);
       this.gameMessage.next(message.body);
     });
   }

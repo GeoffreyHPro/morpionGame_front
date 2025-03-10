@@ -12,15 +12,6 @@ export class GameComponent {
 
   constructor(private clientWebSocketService: WebsocketService) { }
 
-  ngOnInit() {
-    this.clientWebSocketService.getGameMessage().subscribe(
-      response => {
-        console.log(response);
-      }
-    )
-  }
-
-
   cellClick(event: Event) {
     const cell = event.target as HTMLElement;
     cell.setAttribute("disabled", "true");

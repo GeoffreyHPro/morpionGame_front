@@ -30,10 +30,7 @@ export class LoginComponent {
 
     this.authService.login(email, password).subscribe(
       response => {
-        console.log(response.body?.token)
-
         localStorage.setItem("token", response.body!.token);
-        console.log(response.body!.token)
         localStorage.setItem("role", response.body!.role);
         this.router.navigateByUrl("home")
       }
