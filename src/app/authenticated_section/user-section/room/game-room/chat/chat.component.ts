@@ -29,12 +29,14 @@ export class ChatComponent {
 
     this.webSocket.getMessageRoom().subscribe(
       message => {
-        this.messages.push(convertToInterfaceMessage(message));
+        if (message !== "") {
+          this.messages.push(convertToInterfaceMessage(message));
+        }
       }
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.messages = [];
   }
 
