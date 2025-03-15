@@ -8,6 +8,9 @@
                 <app-chat [username]="username" [roomId]="roomId"></app-chat>
             </div>
         </div>
+        <div *ngIf="!isGameInit" id="waiting-opponent" style="color: white;">
+            Waiting Opponent...
+        </div>
     </div>
     <button *ngIf="isGameInit" (click)="handleButtonStartGame($event)" class="btn"
         style="border: 2px solid white; color: white;">Start
