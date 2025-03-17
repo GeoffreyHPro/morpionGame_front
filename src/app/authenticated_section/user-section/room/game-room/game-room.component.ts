@@ -19,6 +19,7 @@ export class GameRoomComponent {
       response => {
         if (response != "") {
           const gameMessage = convertToInterfaceGameMessage(response);
+          console.log(response)
           if (gameMessage.type === "init_game") {
             this.disabledButtonToAvailable();
           }
